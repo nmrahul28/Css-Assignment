@@ -2,11 +2,11 @@
 <html>
     <head>
         <title>
-            Demo website
+            Demo website                                                    <!--title of the page-->
         </title>
     </head>
     <body>
-        <div class="head">
+        <div class="head">                                                  <!--header creation-->
             <h1>
                 Kellton Tech Solutions Limited
             </h1>
@@ -18,17 +18,17 @@
                     Manikanta Rahul
                 </h2>
             </div>
-        </div>
-        <div class="footer">
+        </div>                                                               <!--header complete-->
+        <div class="footer">                                                 <!--footer start-->
             <pre>
                 <b>
                     Contact No:        Gmail:                   
                     7013117063      abcd.kellton@gmail.com
                 </b>
             </pre>
-        </div>
-        <div class="total_split">
-            <div class="split">
+        </div>                                                                <!--footer complete-->
+        <div class="total_split">                                             <!--creating division for dividing webpage into two parts-->
+            <div class="split">                                               <!-- left split-75%-->
                 <table>
                     <tr>
                         <td>
@@ -78,8 +78,8 @@
                         </td>
                     </tr>
                 </table>
-            </div>
-            <div class="split_right">
+            </div>                                                                                    <!--left split complete-->
+            <div class="split_right">                                                                 <!--right split having scrollable option-->
                 <p>
                     Gradient computation
 The first step of calculation in many feature detectors in image pre-processing is to ensure normalized color and gamma values. As Dalal and Triggs point out, however, this step can be omitted in HOG descriptor computation, as the ensuing descriptor normalization essentially achieves the same result. Image pre-processing thus provides little impact on performance. Instead, the first step of calculation is the computation of the gradient values. The most common method is to apply the 1-D centered, point discrete derivative mask in one or both of the horizontal and vertical directions. Specifically, this method requires filtering the color or intensity data of the image with the following filter kernels:
@@ -129,17 +129,17 @@ At the IEEE International Conference on Image Processing in 2010, Rui Hu, Mark B
 
 In 2010, Martin Krückhans introduced an enhancement of the HOG descriptor for 3D pointclouds.[16] Instead of image gradients he used distances between points (pixels) and planes, so called residuals, to characterize a local region in a pointcloud. His histogram of oriented residuals descriptor (HOR) was successfully used in object detection tasks of 3d pointclouds.[17]
                 </p>
-            </div>
+            </div>                                                              <!--right split complete-->
         </div>
     </body>
 </html>
-<style>
+/*css part*/
+<style>                                                             
     .head{
         left: 0px;
         width: 100%;
-        /*background-color: #9933ff;*/
         position: fixed;
-        text-align: center;
+        text-align: center;                     /*style for header*/
         z-index: 1;
         top: 0px;
         color: #1a90ff
@@ -148,14 +148,14 @@ In 2010, Martin Krückhans introduced an enhancement of the HOG descriptor for 3
         float: right;
     }
     .top-right{
-        position: fixed;
+        position: fixed;                       /*style for having image and name at right*/
         top: 0px;
         right: 0px;
     }
     h2{
         text-align: right;
     }
-    .split{
+    .split{                                   /*styling for left split of web page*/
         left: 0px;
         /*top: 130px;*/
         width: 75%;
@@ -170,7 +170,7 @@ In 2010, Martin Krückhans introduced an enhancement of the HOG descriptor for 3
     .color{
         background-color: #9933ff;
     }
-    .split_right{
+    .split_right{                           /*right split styling*/
         float: right;
         right: 0px;
         /*top: 130px;*/
@@ -180,7 +180,7 @@ In 2010, Martin Krückhans introduced an enhancement of the HOG descriptor for 3
         overflow: scroll;
         color: rgb(255,255,255);
     }
-    .total_split{
+    .total_split{                       
         left: 0px;
         top: 130px;
         width: 100%;
@@ -190,7 +190,7 @@ In 2010, Martin Krückhans introduced an enhancement of the HOG descriptor for 3
         z-index: -1;
     }
     .footer{
-        bottom: 0px;
+        bottom: 0px;                            /*footer styling*/
         height: 60pt;
         width: 100%;
         color: #1a90ff;
