@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Demo website
+        </title>
+    </head>
+    <body>
+        <div class="head">
+            <h1>
+                Kellton Tech Solutions Limited
+            </h1>
+            <div class=top-right>
+                <img src="kellton2.JPG" alt="website icon" height="85px" width="85px">
+            </div>
+            <div>
+                <h2 class="right">
+                    Manikanta Rahul
+                </h2>
+            </div>
+        </div>
+        <div class="footer">
+            <pre>
+                <b>
+                    Contact No:        Gmail:                   
+                    7013117063      abcd.kellton@gmail.com
+                </b>
+            </pre>
+        </div>
+        <div class="total_split">
+            <div class="split">
+                <table>
+                    <tr>
+                        <td>
+                            <b>
+                                First Name
+                            </b>
+                        </td>
+                        <td>
+                            <input type="text" name="First name" placeholder="First Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>
+                                Last Name
+                            </b>
+                        </td>
+                        <td>
+                            <input type="text" name="Last Name" placeholder="Last Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>
+                                User name
+                            </b>
+                        </td>
+                        <td>
+                            <input type="text" name="username" placeholder="User Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>
+                                password
+                            </b>
+                        </td>
+                        <td>
+                            <input type="password" name="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <button type="button" class="color"><a href="page2.html">Signup</a></button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="split_right">
+                <p>
+                    Gradient computation
+The first step of calculation in many feature detectors in image pre-processing is to ensure normalized color and gamma values. As Dalal and Triggs point out, however, this step can be omitted in HOG descriptor computation, as the ensuing descriptor normalization essentially achieves the same result. Image pre-processing thus provides little impact on performance. Instead, the first step of calculation is the computation of the gradient values. The most common method is to apply the 1-D centered, point discrete derivative mask in one or both of the horizontal and vertical directions. Specifically, this method requires filtering the color or intensity data of the image with the following filter kernels:
+
+{\displaystyle [-1,0,1]{\text{ and }}[-1,0,1]^{\top }.\,} {\displaystyle [-1,0,1]{\text{ and }}[-1,0,1]^{\top }.\,}
+Dalal and Triggs tested other, more complex masks, such as the 3x3 Sobel mask or diagonal masks, but these masks generally performed more poorly in detecting humans in images. They also experimented with Gaussian smoothing before applying the derivative mask, but similarly found that omission of any smoothing performed better in practice.[4]
+
+Orientation binning
+The second step of calculation is creating the cell histograms. Each pixel within the cell casts a weighted vote for an orientation-based histogram channel based on the values found in the gradient computation. The cells themselves can either be rectangular or radial in shape, and the histogram channels are evenly spread over 0 to 180 degrees or 0 to 360 degrees, depending on whether the gradient is “unsigned” or “signed”. Dalal and Triggs found that unsigned gradients used in conjunction with 9 histogram channels performed best in their human detection experiments. As for the vote weight, pixel contribution can either be the gradient magnitude itself, or some function of the magnitude. In tests, the gradient magnitude itself generally produces the best results. Other options for the vote weight could include the square root or square of the gradient magnitude, or some clipped version of the magnitude.[5]
+
+Descriptor blocks
+To account for changes in illumination and contrast, the gradient strengths must be locally normalized, which requires grouping the cells together into larger, spatially connected blocks. The HOG descriptor is then the concatenated vector of the components of the normalized cell histograms from all of the block regions. These blocks typically overlap, meaning that each cell contributes more than once to the final descriptor. Two main block geometries exist: rectangular R-HOG blocks and circular C-HOG blocks. R-HOG blocks are generally square grids, represented by three parameters: the number of cells per block, the number of pixels per cell, and the number of channels per cell histogram. In the Dalal and Triggs human detection experiment, the optimal parameters were found to be four 8x8 pixels cells per block (16x16 pixels per block) with 9 histogram channels. Moreover, they found that some minor improvement in performance could be gained by applying a Gaussian spatial window within each block before tabulating histogram votes in order to weight pixels around the edge of the blocks less. The R-HOG blocks appear quite similar to the scale-invariant feature transform (SIFT) descriptors; however, despite their similar formation, R-HOG blocks are computed in dense grids at some single scale without orientation alignment, whereas SIFT descriptors are usually computed at sparse, scale-invariant key image points and are rotated to align orientation. In addition, the R-HOG blocks are used in conjunction to encode spatial form information, while SIFT descriptors are used singly.
+
+Circular HOG blocks (C-HOG) can be found in two variants: those with a single, central cell and those with an angularly divided central cell. In addition, these C-HOG blocks can be described with four parameters: the number of angular and radial bins, the radius of the center bin, and the expansion factor for the radius of additional radial bins. Dalal and Triggs found that the two main variants provided equal performance, and that two radial bins with four angular bins, a center radius of 4 pixels, and an expansion factor of 2 provided the best performance in their experimentation(to achieve a good performance, at last use this configure). Also, Gaussian weighting provided no benefit when used in conjunction with the C-HOG blocks. C-HOG blocks appear similar to shape context descriptors, but differ strongly in that C-HOG blocks contain cells with several orientation channels, while shape contexts only make use of a single edge presence count in their formulation.[6]
+
+Block normalization
+Dalal and Triggs explored four different methods for block normalization. Let {\displaystyle v} v be the non-normalized vector containing all histograms in a given block, {\displaystyle \|v\|_{k}} \|v\|_{k} be its k-norm for {\displaystyle k={1,2}} k={1,2} and {\displaystyle e} e be some small constant (the exact value, hopefully, is unimportant). Then the normalization factor can be one of the following:
+
+L2-norm: {\displaystyle f={v \over {\sqrt {\|v\|_{2}^{2}+e^{2}}}}} f={v \over {\sqrt {\|v\|_{2}^{2}+e^{2}}}}
+L2-hys: L2-norm followed by clipping (limiting the maximum values of v to 0.2) and renormalizing, as in[7]
+L1-norm: {\displaystyle f={v \over (\|v\|_{1}+e)}} f={v \over (\|v\|_{1}+e)}
+L1-sqrt: {\displaystyle f={\sqrt {v \over (\|v\|_{1}+e)}}} f={\sqrt {v \over (\|v\|_{1}+e)}}
+In addition, the scheme L2-hys can be computed by first taking the L2-norm, clipping the result, and then renormalizing. In their experiments, Dalal and Triggs found the L2-hys, L2-norm, and L1-sqrt schemes provide similar performance, while the L1-norm provides slightly less reliable performance; however, all four methods showed very significant improvement over the non-normalized data.[8]
+
+Object recognition
+HOG descriptors may be used for object recognition by providing them as features to a machine learning algorithm. Dalal and Triggs used HOG descriptors as features in a support vector machine (SVM) [9]; however, HOG descriptors are not tied to a specific machine learning algorithm.
+
+Performance
+In their original human detection experiment, Dalal and Triggs compared their R-HOG and C-HOG descriptor blocks against generalized Haar wavelets, PCA-SIFT descriptors, and shape context descriptors. Generalized Haar wavelets are oriented Haar wavelets, and were used in 2001 by Mohan, Papageorgiou, and Poggio in their own object detection experiments. PCA-SIFT descriptors are similar to SIFT descriptors, but differ in that principal component analysis is applied to the normalized gradient patches. PCA-SIFT descriptors were first used in 2004 by Ke and Sukthankar and were claimed to outperform regular SIFT descriptors. Finally, shape contexts use circular bins, similar to those used in C-HOG blocks, but only tabulate votes on the basis of edge presence, making no distinction with regards to orientation. Shape contexts were originally used in 2001 by Belongie, Malik, and Puzicha.
+
+The testing commenced on two different data sets. The Massachusetts Institute of Technology (MIT) pedestrian database contains 509 training images and 200 test images of pedestrians on city streets. The set only contains images featuring the front or back of human figures and contains little variety in human pose. The set is well-known and has been used in a variety of human detection experiments, such as those conducted by Papageorgiou and Poggio in 2000. The MIT database is currently available for research at http://cbcl.mit.edu/cbcl/software-datasets/PedestrianData.html. The second set was developed by Dalal and Triggs exclusively for their human detection experiment due to the fact that the HOG descriptors performed near-perfectly on the MIT set. Their set, known as INRIA, contains 1805 images of humans taken from personal photographs. The set contains images of humans in a wide variety of poses and includes difficult backgrounds, such as crowd scenes, thus rendering it more complex than the MIT set. The INRIA database is currently available for research at http://lear.inrialpes.fr/data.
+
+The above site has an image showing examples from the INRIA human detection database.
+
+As for the results, the C-HOG and R-HOG block descriptors perform comparably, with the C-HOG descriptors maintaining a slight advantage in the detection miss rate at fixed false positive rates across both data sets. On the MIT set, the C-HOG and R-HOG descriptors produced a detection miss rate of essentially zero at a 10−4 false positive rate. On the INRIA set, the C-HOG and R-HOG descriptors produced a detection miss rate of roughly 0.1 at a 10−4 false positive rate. The generalized Haar wavelets represent the next highest performing approach: they produced roughly a 0.01 miss rate at a 10−4 false positive rate on the MIT set, and roughly a 0.3 miss rate on the INRIA set. The PCA-SIFT descriptors and shape context descriptors both performed fairly poorly on both data sets. Both methods produced a miss rate of 0.1 at a 10−4 false positive rate on the MIT set and nearly a miss rate of 0.5 at a 10−4 false positive rate on the INRIA set.
+
+Further development
+As part of the Pascal Visual Object Classes 2006 Workshop, Dalal and Triggs presented results on applying histogram of oriented gradients descriptors to image objects other than humans, such as cars, buses, and bicycles, as well as common animals such as dogs, cats, and cows. They included with their results the optimal parameters for block formulation and normalization in each case. The image in the below reference shows some of their detection examples for motorbikes.[10]
+
+As part of the 2006 European Conference on Computer Vision (ECCV), Dalal and Triggs teamed up with Cordelia Schmid to apply HOG detectors to the problem of human detection in films and videos. They combined HOG descriptors on individual video frames with their newly introduced internal motion histograms (IMH) on pairs of subsequent video frames. These internal motion histograms use the gradient magnitudes from optical flow fields obtained from two consecutive frames. These gradient magnitudes are then used in the same manner as those produced from static image data within the HOG descriptor approach. When testing on two large datasets taken from several movies, the combined HOG-IMH method yielded a miss rate of approximately 0.1 at a {\displaystyle 10^{-4}} 10^{-4} false positive rate.[11]
+
+At the Intelligent Vehicles Symposium in 2006, F. Suard, A. Rakotomamonjy, and A. Bensrhair introduced a complete system for pedestrian detection based on HOG descriptors. Their system operates using two infrared cameras. Since human beings appear brighter than their surroundings on infrared images, the system first locates positions of interest within the larger view field where humans could possibly be located. Then support vector machine classifiers operate on the HOG descriptors taken from these smaller positions of interest to formulate a decision regarding the presence of a pedestrian. Once pedestrians are located within the view field, the actual position of the pedestrian is estimated using stereo vision.[12]
+
+At the IEEE Conference on Computer Vision and Pattern Recognition in 2006, Qiang Zhu, Shai Avidan, Mei-Chen Yeh, and Kwang-Ting Cheng presented an algorithm to significantly speed up human detection using HOG descriptor methods. Their method uses HOG descriptors in combination with the cascading classifiers algorithm normally applied with great success to face detection. Also, rather than relying on blocks of uniform size, they introduce blocks that vary in size, location, and aspect ratio. In order to isolate the blocks best suited for human detection, they applied the AdaBoost algorithm to select those blocks to be included in the cascade. In their experimentation, their algorithm achieved comparable performance to the original Dalal and Triggs algorithm, but operated at speeds up to 70 times faster. In 2006, the Mitsubishi Electric Research Laboratories applied for the U.S. Patent of this algorithm under application number 20070237387.[13]
+
+At the IEEE International Conference on Image Processing in 2010, Rui Hu, Mark Banard, and John Collomosse extended the HOG descriptor for use in sketch based image retrieval (SBIR). A dense orientation field was extrapolated from dominant responses in the Canny edge detector under a Laplacian smoothness constraint, and HOG computed over this field. The resulting gradient field HOG (GF-HOG) descriptor captured local spatial structure in sketches or image edge maps. This enabled the descriptor to be used within a content-based image retrieval system searchable by free-hand sketched shapes.[14] The GF-HOG adaptation was shown to outperform existing gradient histogram descriptors such as SIFT, SURF, and HOG by around 15 percent at the task of SBIR.[15]
+
+In 2010, Martin Krückhans introduced an enhancement of the HOG descriptor for 3D pointclouds.[16] Instead of image gradients he used distances between points (pixels) and planes, so called residuals, to characterize a local region in a pointcloud. His histogram of oriented residuals descriptor (HOR) was successfully used in object detection tasks of 3d pointclouds.[17]
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
+<style>
+    .head{
+        left: 0px;
+        width: 100%;
+        /*background-color: #9933ff;*/
+        position: fixed;
+        text-align: center;
+        z-index: 1;
+        top: 0px;
+        color: #1a90ff
+    }
+    .img{
+        float: right;
+    }
+    .top-right{
+        position: fixed;
+        top: 0px;
+        right: 0px;
+    }
+    h2{
+        text-align: right;
+    }
+    .split{
+        left: 0px;
+        /*top: 130px;*/
+        width: 75%;
+        position: absolute;
+        background-color: #99ddff;
+        height: 600pt;
+        z-index: -1;
+    }
+    table, tr, td{
+        padding: 8pt;
+    }
+    .color{
+        background-color: #9933ff;
+    }
+    .split_right{
+        float: right;
+        right: 0px;
+        /*top: 130px;*/
+        width: 25%;
+        height: 600pt;
+        background-color: #ff66ff;
+        overflow: scroll;
+        color: rgb(255,255,255);
+    }
+    .total_split{
+        left: 0px;
+        top: 130px;
+        width: 100%;
+        position: absolute;
+        /*background-color: #99ddff;*/
+        height: 600pt;
+        z-index: -1;
+    }
+    .footer{
+        bottom: 0px;
+        height: 60pt;
+        width: 100%;
+        color: #1a90ff;
+        position: fixed;
+        left: 0px;
+        background-color: rgb(255,255,255);
+            
+    }
+    pre{
+        font-family: cursive;
+        font-size: 12pt;
+        text-align: left;
+        padding-bottom: 15pt;        
+    }
+
+</style>
